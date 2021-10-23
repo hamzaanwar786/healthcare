@@ -13,16 +13,21 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       body: Column(
         children: [
+          SizedBox(
+            height: 50,
+          ),
           Card(
             child: Container(
-              padding: EdgeInsets.all(20),
-              child: Icon(
-                Icons.person,
-                size: 40.0,
-              ),
-            ),
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                height: 200,
+                child: Image.asset(
+                  'assets/images/personicon.png',
+                  height: 20,
+                  width: 20,
+                )),
             elevation: 4.0,
-          )
+          ),
         ],
       ),
     );
