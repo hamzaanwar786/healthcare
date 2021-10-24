@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:healthcare/screens/homepage.dart';
+import '../screens/bottomnavigationview.dart';
+import '../screens/homepage.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -17,8 +18,8 @@ class _SignUpState extends State<SignUp> {
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => BottomNavigationView()));
       }
     });
   }

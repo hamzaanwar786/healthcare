@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../screens/homepage.dart';
+import '../screens/bottomnavigationview.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -49,6 +50,8 @@ class _LoginState extends State<Login> {
           showError('No user found for that email.');
         } else if (e.code == 'wrong-password') {
           showError('Wrong password provided for that user.');
+        } else {
+          showError('' + e.code);
         }
       }
     }

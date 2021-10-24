@@ -28,6 +28,36 @@ class _ProfileState extends State<Profile> {
                 )),
             elevation: 4.0,
           ),
+          SizedBox(
+            height: 40,
+          ),
+          Card(
+            child: Container(
+              width: double.infinity,
+              child: Column(
+                children: [
+                  Container(
+                    child: Text(
+                      "Name",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: Text('email', style: TextStyle(fontSize: 20)),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: Text('number', style: TextStyle(fontSize: 20)),
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

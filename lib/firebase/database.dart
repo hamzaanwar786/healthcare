@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class Database {
-  FirebaseAuth? firebaseUser;
   FirebaseFirestore? firebaseFirestore;
+  CollectionReference? collectionReference;
 
   initilize() {
-    firebaseUser = FirebaseAuth.instance;
     firebaseFirestore = FirebaseFirestore.instance;
   }
 
@@ -32,12 +30,26 @@ class Database {
     }
   }
 
-  Future<void> addUser(String name, String email, String phone_no) async {
-    CollectionReference collectionReference =
-        await firebaseFirestore!.collection('users');
-    return collectionReference
-        .add({"name": name, "email": email, "phone_no": phone_no})
-        .then((value) => print("User Added Successfully"))
-        .catchError((onError) => print("failed to add user : $onError"));
-  }
+  // Future<void> addApointment(
+  //     String name, String location, String desciption) async {
+  //   CollectionReference collectionReference =
+  //       await firebaseFirestore!.collection('appointments');
+  //   return collectionReference
+  //       .add({"name": name, "email": location, "phone_no": desciption})
+  //       .then((value) => print("User Added Successfully"))
+  //       .catchError((onError) => print("failed to add user : $onError"));
+  // }
+
+  // Future<void> addApointment() {
+  //   collectionReference = FirebaseFirestore.instance.collection('appointments');
+  //   // Call the user's CollectionReference to add a new user
+  //   return collectionReference!
+  //       .add({
+  //         'name': name, // John Doe
+  //         'location': location, // Stokes and Sons
+  //         'desciption': desciption // 42
+  //       })
+  //       .then((value) => print("User Added"))
+  //       .catchError((error) => print("Failed to add user: $error"));
+  // }
 }

@@ -30,6 +30,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^0.20.1
   cloud_firestore: "^0.16.0+1"
+  font_awesome_flutter: ^9.1.0
+  bottom_navy_bar: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +54,7 @@ flutter:
     - assets/images/loginimage.jpg
     - assets/images/registerimage.jpg
     - assets/images/personicon.png
+    - assets/images/mypic.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

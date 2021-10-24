@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import './screens/profile.dart';
-import './screens/homepage.dart';
+import 'package:healthcare/screens/homepage.dart';
+import './screens/my_appointments.dart';
+import './screens/bottomnavigationview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +18,8 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blueAccent,
       ),
       debugShowCheckedModeBanner: false,
-      // home: HomePage(),
-      home: Profile(),
+      // home: MyAppointments(),
+      home: BottomNavigationView(),
     );
   }
 }

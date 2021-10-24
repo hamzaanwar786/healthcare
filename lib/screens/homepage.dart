@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         this.user = user;
         this.isloggedin = true;
-        database!.initilize();
+        // database!.initilize();
       });
     }
   }
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Container(
           child: !isloggedin
-              ? Center(child: CircularProgressIndicator())
+              ? CircularProgressIndicator()
               : Column(
                   children: [
                     SizedBox(
