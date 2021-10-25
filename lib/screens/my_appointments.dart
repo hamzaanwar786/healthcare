@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:healthcare/constants/constants.dart';
+import 'package:healthcare/screens/appointment_doctors.dart';
 
 class MyAppointments extends StatefulWidget {
   const MyAppointments({Key? key}) : super(key: key);
@@ -27,35 +28,98 @@ class _MyAppointmentsState extends State<MyAppointments> {
 
         return SafeArea(
           child: Scaffold(
-            body: ListView(
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data =
-                    document.data()! as Map<String, dynamic>;
-                return Card(
+            body: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
                   child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    margin: EdgeInsets.only(left: 10),
+                    child: Row(
                       children: [
-                        Container(
-                          alignment: Alignment.topLeft,
+                        Expanded(
+                          flex: 2,
                           child: Text(
-                            data['name'],
-                            style: kStyle,
+                            'Appoinments',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Color(0XFF302F33),
+                              fontSize: 33,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            data['location'],
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                                icon: Icon(Icons.add),
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute<void>(
+                                    builder: (BuildContext context) {
+                                      return AppointmentDoctors();
+                                    },
+                                  ));
+                                }),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  elevation: 4.0,
-                );
-              }).toList(),
+                ),
+                Expanded(
+                  child: ListView(
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data()! as Map<String, dynamic>;
+                      return Card(
+                        child: Container(
+                          padding: EdgeInsets.all(20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  data['doctor'],
+                                  style: kStyle,
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  data['hospital'],
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  data['date'],
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  data['time'],
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  data['location'],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        elevation: 4.0,
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
             ),
           ),
         );

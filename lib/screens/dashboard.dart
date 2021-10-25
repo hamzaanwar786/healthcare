@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:healthcare/constants/constants.dart';
 import 'package:healthcare/firebase/database.dart';
 import 'package:healthcare/screens/appointment_doctors.dart';
+import 'package:healthcare/screens/my_appointments.dart';
 import 'package:healthcare/screens/start.dart';
 
 class Dashboard extends StatefulWidget {
@@ -136,7 +137,7 @@ class _DashboardState extends State<Dashboard> {
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute<void>(
                               builder: (BuildContext context) {
-                                return AppointmentDoctors();
+                                return MyAppointments();
                               },
                             ));
                           },
