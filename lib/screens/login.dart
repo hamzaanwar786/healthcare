@@ -29,8 +29,8 @@ class _LoginState extends State<Login> {
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Dashboard()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => BottomNavigationView()));
       }
     });
     @override
@@ -46,6 +46,7 @@ class _LoginState extends State<Login> {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
+        checkAuthentification();
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           showError('No user found for that email.');
