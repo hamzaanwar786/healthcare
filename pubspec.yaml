@@ -56,6 +56,7 @@ flutter:
     - assets/images/registerimage.jpg
     - assets/images/personicon.png
     - assets/images/mypic.png
+    - assets/images/blue_back.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

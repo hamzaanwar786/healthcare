@@ -6,7 +6,7 @@ import 'package:healthcare/firebase/database.dart';
 import 'package:healthcare/screens/my_appointments.dart';
 
 class AppointmentDoctors extends StatefulWidget {
-  const AppointmentDoctors({Key? key}) : super(key: key);
+  static const routename = '/appointments';
 
   @override
   _AppointmentDoctorsState createState() => _AppointmentDoctorsState();
