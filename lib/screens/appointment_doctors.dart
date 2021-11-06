@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +16,7 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
   bool isChecked = false;
   var hospitalId;
   var doctorId;
+
   Database? database;
   String date = "";
   DateTime selectedDate = DateTime.now();
@@ -33,7 +35,8 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
   Future<void> addApointment() {
     // Call the user's CollectionReference to add a new user
     return collectionReference
-        .add({
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .set({
           'name': _name,
           'location': _location,
           'hospital': _hospital_name,
@@ -70,7 +73,7 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
     if (timeOfDay != null && timeOfDay != selectedTime) {
       setState(() {
         selectedTime = timeOfDay;
-        _time = '${selectedTime.hour} : ${selectedTime.minute}';
+        _time = "${selectedTime.hour} : ${selectedTime.minute}";
         print(_time);
       });
     }

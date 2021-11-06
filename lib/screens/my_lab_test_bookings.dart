@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:healthcare/constants/constants.dart';
-import 'package:healthcare/screens/appointment_doctors.dart';
+import 'package:healthcare/screens/my_lab_tests.dart';
 
-class MyAppointments extends StatefulWidget {
-  const MyAppointments({Key? key}) : super(key: key);
+class MyLabTestBookings extends StatefulWidget {
+  const MyLabTestBookings({Key? key}) : super(key: key);
 
   @override
-  _MyAppointmentsState createState() => _MyAppointmentsState();
+  _MyLabTestBookingsState createState() => _MyLabTestBookingsState();
 }
 
-class _MyAppointmentsState extends State<MyAppointments> {
+class _MyLabTestBookingsState extends State<MyLabTestBookings> {
   final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('appointments').snapshots();
+      FirebaseFirestore.instance.collection('labtestbooking').snapshots();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,7 +28,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
                     Expanded(
                       flex: 2,
                       child: Text(
-                        'Appoinments',
+                        'Lab Test',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           color: Color(0XFF302F33),
@@ -46,7 +46,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute<void>(
                                 builder: (BuildContext context) {
-                                  return AppointmentDoctors();
+                                  return MyLabTests();
                                 },
                               ));
                             }),
@@ -83,14 +83,14 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      data['doctor'],
+                                      data['lab'],
                                       style: kStyle,
                                     ),
                                   ),
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      data['hospital'],
+                                      data['tests'],
                                     ),
                                   ),
                                   Container(
@@ -102,13 +102,19 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      data['time'],
+                                      data['location'],
                                     ),
                                   ),
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      data['location'],
+                                      data['name'],
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data['price'],
                                     ),
                                   ),
                                 ],

@@ -1,10 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:healthcare/constants/constants.dart';
 import 'package:healthcare/firebase/database.dart';
+import 'package:healthcare/models/doctors_model.dart';
 import 'package:healthcare/screens/appointment_doctors.dart';
 import 'package:healthcare/screens/my_appointments.dart';
+import 'package:healthcare/screens/my_lab_test_bookings.dart';
+import 'package:healthcare/screens/my_lab_tests.dart';
+import 'package:healthcare/screens/order_medicine.dart';
 import 'package:healthcare/screens/start.dart';
 
 class Dashboard extends StatefulWidget {
@@ -19,6 +24,7 @@ class _DashboardState extends State<Dashboard> {
   User? user;
   bool isloggedin = false;
   String? _name, _phone_no, _email;
+  List<Doctors> docList = [];
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user == null) {
@@ -41,6 +47,9 @@ class _DashboardState extends State<Dashboard> {
       });
     }
   }
+
+  final Stream<QuerySnapshot> _doctors =
+      FirebaseFirestore.instance.collection('doctors').snapshots();
 
   singout() async {
     _auth.signOut();
@@ -106,190 +115,113 @@ class _DashboardState extends State<Dashboard> {
 
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Row(
-                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        RawMaterialButton(
-                          child: Card(
-                            margin: EdgeInsets.only(left: 10),
-                            child: Container(
-                              width: 150,
-                              height: 150,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(FontAwesomeIcons.plus),
-                                  Text(
-                                    'Appoinment',
-                                    style: kStyle,
-                                  ),
-                                  Text(
-                                    'Doctors appointment',
-                                  ),
-                                ],
-                              ),
-                            ),
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute<void>(
-                              builder: (BuildContext context) {
-                                return MyAppointments();
-                              },
-                            ));
-                          },
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              // margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10),
-                              width: 185,
-                              height: 154,
-                              child: Card(
-                                color: Color(0xFF7165D6),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(13.0),
-                                ),
-                                elevation: 15,
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      child: Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          RawMaterialButton(
+                            child: Card(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Container(
+                                width: 150,
+                                height: 150,
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    RawMaterialButton(
-                                      hoverColor: Colors.blueGrey,
-                                      elevation: 0.0,
-                                      child: const Icon(
-                                        FontAwesomeIcons.plus,
-                                        size: 30,
-                                        textDirection: TextDirection.rtl,
-                                      ),
-                                      onPressed: () {
-                                        // Navigator.push(context, MaterialPageRoute<void>(
-                                        //   builder: (BuildContext context) {
-                                        //     return PatientInfo();
-                                        //   },
-                                        // ));
-                                        print('Patient Info');
-                                      },
-                                      constraints:
-                                          const BoxConstraints.tightFor(
-                                        width: 56.0,
-                                        height: 56.0,
-                                      ),
-                                      shape: CircleBorder(),
-                                      fillColor: Color(0xFFFFFFFF),
-                                    ),
-                                    const Text(
-                                      'Clinic Visit',
+                                    Icon(FontAwesomeIcons.plus),
+                                    Text(
+                                      'Appoinment',
                                       style: kStyle,
                                     ),
-                                    Text('Make an Appointment'),
+                                    Text(
+                                      'Doctors appointment',
+                                    ),
                                   ],
                                 ),
                               ),
+                              elevation: 4.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
                             ),
-                          ],
-                        ),
-                        Container(
-                          width: 180,
-                          height: 154,
-                          child: Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
-                            child: Column(
-                              //mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                ListTile(
-                                  leading: Icon(FontAwesomeIcons.plus),
-                                ),
-                                Text(
-                                  'Clinic Visit',
-                                  style: kStyle,
-                                ),
-                                Text('Make an Appointment'),
-                              ],
-                            ),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute<void>(
+                                builder: (BuildContext context) {
+                                  return MyAppointments();
+                                },
+                              ));
+                            },
                           ),
-                        ),
-                        Container(
-                          width: 180,
-                          height: 154,
-                          child: Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
-                            child: Column(
-                              //mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                ListTile(
-                                  leading: Icon(FontAwesomeIcons.plus),
+                          RawMaterialButton(
+                            child: Card(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Container(
+                                width: 150,
+                                height: 150,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(FontAwesomeIcons.plus),
+                                    Text(
+                                      'Lab Test',
+                                      style: kStyle,
+                                    ),
+                                    Text(
+                                      'Lab Test Booking',
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  'Clinic Visit',
-                                  style: kStyle,
-                                ),
-                                Text('Make an Appointment'),
-                              ],
+                              ),
+                              elevation: 4.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
                             ),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute<void>(
+                                builder: (BuildContext context) {
+                                  return MyLabTestBookings();
+                                },
+                              ));
+                            },
                           ),
-                        ),
-                        Container(
-                          width: 180,
-                          height: 154,
-                          child: Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
-                            child: Column(
-                              //mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                ListTile(
-                                  leading: Icon(FontAwesomeIcons.plus),
+                          RawMaterialButton(
+                            child: Card(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: 150,
+                                height: 150,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(FontAwesomeIcons.plus),
+                                    Text(
+                                      'Order Medicine',
+                                      style: kStyle,
+                                    ),
+                                    Text(
+                                      'Order your medicine online',
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  'Clinic Visit',
-                                  style: kStyle,
-                                ),
-                                Text('Make an Appointment'),
-                              ],
+                              ),
+                              elevation: 4.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
                             ),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute<void>(
+                                builder: (BuildContext context) {
+                                  return OrderMedicine();
+                                },
+                              ));
+                            },
                           ),
-                        ),
-                        Container(
-                          width: 180,
-                          height: 154,
-                          child: Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
-                            child: Column(
-                              //mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                ListTile(
-                                  leading: Icon(FontAwesomeIcons.plus),
-                                ),
-                                sizebox1,
-                                Text(
-                                  'Clinic Visit',
-                                  style: kStyle,
-                                ),
-                                sizebox2,
-                                Text('Make an Appointment'),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 
@@ -315,6 +247,101 @@ class _DashboardState extends State<Dashboard> {
             * njfkdlcxm
             * vndfjkcxm
             * nvfdkl*/
+
+                  new StreamBuilder<QuerySnapshot>(
+                      stream: _doctors,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return new Text(
+                              'Error in receiving trip photos: ${snapshot.error}');
+                        }
+
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                            return new Text(
+                                'Not connected to the Stream or null');
+
+                          case ConnectionState.waiting:
+                            return new Text('Awaiting for interaction');
+
+                          case ConnectionState.active:
+                            print("Stream has started but not finished");
+
+                            var totalPhotosCount = 0;
+                            List<DocumentSnapshot> tripPhotos;
+
+                            if (snapshot.hasData) {
+                              tripPhotos = snapshot.data!.docs;
+                              totalPhotosCount = tripPhotos.length;
+
+                              if (totalPhotosCount > 0) {
+                                return new GridView.builder(
+                                    itemCount: totalPhotosCount,
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    gridDelegate:
+                                        new SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Center(
+                                        child: Card(
+                                          child: Container(
+                                              alignment: Alignment.center,
+                                              width: 180,
+                                              height: 188,
+                                              child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        CircleAvatar(
+                                                            radius: 30,
+                                                            backgroundImage:
+                                                                AssetImage(
+                                                                    'assets/images/mypic.png')),
+                                                        sizebox1,
+                                                        Text(
+                                                          tripPhotos[index]
+                                                              ['name'],
+                                                          style: kStyle,
+                                                        ),
+                                                        sizebox2,
+                                                        Text(tripPhotos[index]
+                                                            ['field']),
+                                                      ],
+                                                    ),
+                                                  ])),
+                                        ),
+                                      );
+                                    });
+                              }
+                            }
+
+                            return new Center(
+                                child: Column(
+                              children: <Widget>[
+                                new Padding(
+                                  padding: const EdgeInsets.only(top: 50.0),
+                                ),
+                                new Text(
+                                  "No trip photos found.",
+                                  style: kStyle,
+                                )
+                              ],
+                            ));
+
+                          case ConnectionState.done:
+                            return new Text('Streaming is done');
+                        }
+                      }),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

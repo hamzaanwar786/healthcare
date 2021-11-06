@@ -11,3 +11,7 @@ const sizebox1 = SizedBox(
 const sizebox2 = SizedBox(
   height: 6,
 );
+const dropStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w400,
+);

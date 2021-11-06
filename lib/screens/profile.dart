@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -8,6 +9,12 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  singout() async {
+    _auth.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +61,7 @@ class _ProfileState extends State<Profile> {
                   Container(
                     child: Text('number', style: TextStyle(fontSize: 20)),
                   ),
+                  ElevatedButton(onPressed: singout, child: Text('SignOut')),
                 ],
               ),
             ),

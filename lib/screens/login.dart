@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthcare/screens/dashboard.dart';
 
 import '../screens/homepage.dart';
 import '../screens/bottomnavigationview.dart';
@@ -29,7 +30,7 @@ class _LoginState extends State<Login> {
     _auth.authStateChanges().listen((user) {
       if (user != null) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => Dashboard()));
       }
     });
     @override
