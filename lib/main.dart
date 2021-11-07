@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:healthcare/screens/appointment_doctors.dart';
 import 'package:healthcare/screens/doctors_profile.dart';
 import 'package:healthcare/screens/homepage.dart';
 import './screens/my_appointments.dart';
@@ -20,12 +19,8 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blueAccent,
       ),
       debugShowCheckedModeBanner: false,
+      // home: MyAppointments(),
       home: DoctorsProfile(),
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (context) => BottomNavigationView(),
-      //   AppointmentDoctors.routename: (ctx) => AppointmentDoctors(),
-      // },
     );
   }
 }
