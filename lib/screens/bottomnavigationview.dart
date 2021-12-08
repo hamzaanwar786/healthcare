@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:healthcare/screens/dashboard.dart';
+import '../screens/dashboard.dart';
 import '../screens/start.dart';
 import '../screens/homepage.dart';
 import '../screens/profile.dart';
 
 class BottomNavigationView extends StatefulWidget {
-  const BottomNavigationView({Key? key}) : super(key: key);
+  static const routename = '/';
 
   @override
   _BottomNavigationViewState createState() => _BottomNavigationViewState();
@@ -30,7 +30,7 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
   getUser() async {
     User? user = await _auth.currentUser;
     await user.reload();
-    user = await _auth.currentUser;
+    // user = await _auth.currentUser;
 
     if (user != null) {
       setState(() {

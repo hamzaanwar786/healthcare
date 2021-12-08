@@ -46,19 +46,18 @@ class _MyLabTestsState extends State<MyLabTests> {
 
   Future<void> addLabTextBooking() {
     // Call the user's CollectionReference to add a new user
-    return collectionReference
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .set({
-          'lab': _labName,
-          'tests': _testName,
-          'date': _date,
-          'location': _location,
-          'name': _name,
-          'phone': _phone,
-          'price': _price,
-        })
-        .then((value) => print("Lab Test Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+    return collectionReference.doc(FirebaseAuth.instance.currentUser.uid).set({
+      'lab': _labName,
+      'tests': _testName,
+      'date': _date,
+      'location': _location,
+      'name': _name,
+      'phone': _phone,
+      'price': _price,
+    }).then((value) {
+      print("Medicine Added");
+      Navigator.of(context).pop();
+    }).catchError((error) => print("Failed to add user: $error"));
   }
 
   void _testDropItemSelected(var newValueSelected) {

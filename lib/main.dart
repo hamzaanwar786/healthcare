@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:healthcare/screens/doctors_profile.dart';
-import 'package:healthcare/screens/homepage.dart';
+
+import './screens/doctors_profile.dart';
+import './screens/homepage.dart';
+import './screens/hospitals.dart';
+import './screens/hospitals_details.dart';
 import './screens/my_appointments.dart';
 import './screens/bottomnavigationview.dart';
 
@@ -19,8 +22,16 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blueAccent,
       ),
       debugShowCheckedModeBanner: false,
+
       // home: MyAppointments(),
-      home: DoctorsProfile(),
+      // home: DoctorsProfile(),
+      initialRoute: '/',
+      routes: {
+        '/': (ctx) => BottomNavigationView(),
+        Hospitals.routename: (ctx) => Hospitals(),
+        HospitalsDetails.routename: (ctx) => HospitalsDetails(),
+        DoctorsProfile.routename: (ctx) => DoctorsProfile(),
+      },
     );
   }
 }

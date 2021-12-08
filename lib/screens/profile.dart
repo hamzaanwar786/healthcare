@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthcare/screens/profile_edit.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -20,6 +21,19 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       body: Column(
         children: [
+          RawMaterialButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute<void>(
+                builder: (BuildContext context) {
+                  return ProfileEdit();
+                },
+              ));
+            },
+            child: Container(
+              alignment: Alignment.topRight,
+              child: Text('Edit'),
+            ),
+          ),
           SizedBox(
             height: 50,
           ),
@@ -45,7 +59,7 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Container(
                     child: Text(
-                      "Name",
+                      _auth.currentUser.displayName,
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
@@ -53,13 +67,11 @@ class _ProfileState extends State<Profile> {
                     height: 20,
                   ),
                   Container(
-                    child: Text('email', style: TextStyle(fontSize: 20)),
+                    child: Text(_auth.currentUser.email,
+                        style: TextStyle(fontSize: 20)),
                   ),
                   SizedBox(
                     height: 20,
-                  ),
-                  Container(
-                    child: Text('number', style: TextStyle(fontSize: 20)),
                   ),
                   ElevatedButton(onPressed: singout, child: Text('SignOut')),
                 ],

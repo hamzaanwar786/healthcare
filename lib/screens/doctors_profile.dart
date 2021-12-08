@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../models/doctors_model.dart';
 
 class DoctorsProfile extends StatefulWidget {
-  const DoctorsProfile({Key? key}) : super(key: key);
+  static const routename = '/doctors_profile';
 
   @override
   _DoctorsProfileState createState() => _DoctorsProfileState();
@@ -11,6 +12,7 @@ class DoctorsProfile extends StatefulWidget {
 class _DoctorsProfileState extends State<DoctorsProfile> {
   @override
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)!.settings.arguments as Doctors;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.blue.shade200,
@@ -30,14 +32,26 @@ class _DoctorsProfileState extends State<DoctorsProfile> {
               child: Column(
                 children: [
                   Image.asset(
-                    'images/mypic.png',
+                    'assets/images/mypic.png',
                     width: 60,
                     height: 60,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Name',
+                      data.name,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      data.field,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -54,7 +68,6 @@ class _DoctorsProfileState extends State<DoctorsProfile> {
                     onPressed: () {},
                   ),
                 ],
-
               ),
             ),
             Expanded(
@@ -62,72 +75,146 @@ class _DoctorsProfileState extends State<DoctorsProfile> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20),)
-                ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    )),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      Text('About Doctor',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          wordSpacing: 1,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Family Medicine Experience delivered inspiring solutions designed to improve patient care practice.',
-                          textAlign: TextAlign.justify,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Study',
+                          textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: 17,
+                            wordSpacing: 1,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
                           ),
                         ),
-                      ),
-                      Form(
-
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: 'Location',
-                                  icon: Icon(Icons.location_on),
-                                  hintText: 'Your Location',
-                                ),
-                                keyboardType: TextInputType.text,
-                                validator: (input) {
-                                  if (input!.isEmpty) return 'Enter location!';
-                                },
-                              ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            data.study,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 17,
                             ),
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: 'City',
-                                  icon: Icon(Icons.location_city),
-                                  hintText: 'Your city address',
-                                ),
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (input) {
-                                  if (input!.isEmpty) return 'Enter email!';
-                                },
-                              ),
-                            ),
-
-                          ],
+                          ),
                         ),
-                      ),
-
-
-
-
-
-
-                    ],
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Fee',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            wordSpacing: 1,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            data.fee,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Days',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            wordSpacing: 1,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            data.days,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Experince',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            wordSpacing: 1,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            '${data.experince} years',
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Time',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            wordSpacing: 1,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            data.time,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Hospitals',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            wordSpacing: 1,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            data.hospitals,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

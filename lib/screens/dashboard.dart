@@ -1,16 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare/screens/welfare.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:healthcare/constants/constants.dart';
 import 'package:healthcare/firebase/database.dart';
-import 'package:healthcare/models/doctors_model.dart';
-import 'package:healthcare/screens/appointment_doctors.dart';
-import 'package:healthcare/screens/my_appointments.dart';
-import 'package:healthcare/screens/my_lab_test_bookings.dart';
-import 'package:healthcare/screens/my_lab_tests.dart';
-import 'package:healthcare/screens/order_medicine.dart';
-import 'package:healthcare/screens/start.dart';
+import '../models/doctors_model.dart';
+import '../screens/hospitals.dart';
+import '../screens/my_appointments.dart';
+import '../screens/my_lab_test_bookings.dart';
+import '../screens/order_medicine.dart';
+import '../screens/start.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -45,6 +46,14 @@ class _DashboardState extends State<Dashboard> {
         this.isloggedin = true;
         // database!.initilize();
       });
+    }
+  }
+
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 
@@ -113,413 +122,219 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           )),
                     ),
-
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
+                    RawMaterialButton(
                       child: Container(
-                        padding: EdgeInsets.all(10.0),
-                        child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            RawMaterialButton(
-                              child: Card(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Container(
-                                  width: 150,
-                                  height: 150,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(FontAwesomeIcons.plus),
-                                      Text(
-                                        'Appoinment',
-                                        style: kStyle,
-                                      ),
-                                      Text(
-                                        'Doctors appointment',
-                                      ),
-                                    ],
-                                  ),
+                        margin: EdgeInsets.all(10.0),
+                        child: Card(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Container(
+                            width: double.infinity,
+                            height: 150,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(FontAwesomeIcons.bookMedical),
+                                Text(
+                                  'Appoinment',
+                                  style: kStyle,
                                 ),
-                                elevation: 4.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
+                                Text(
+                                  'Doctors appointment',
                                 ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute<void>(
-                                  builder: (BuildContext context) {
-                                    return MyAppointments();
-                                  },
-                                ));
-                              },
+                              ],
                             ),
-                            RawMaterialButton(
-                              child: Card(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Container(
-                                  width: 150,
-                                  height: 150,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(FontAwesomeIcons.plus),
-                                      Text(
-                                        'Lab Test',
-                                        style: kStyle,
-                                      ),
-                                      Text(
-                                        'Lab Test Booking',
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                elevation: 4.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute<void>(
-                                  builder: (BuildContext context) {
-                                    return MyLabTestBookings();
-                                  },
-                                ));
-                              },
-                            ),
-                            RawMaterialButton(
-                              child: Card(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: 150,
-                                  height: 150,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(FontAwesomeIcons.plus),
-                                      Text(
-                                        'Order Medicine',
-                                        style: kStyle,
-                                      ),
-                                      Text(
-                                        'Order your medicine online',
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                elevation: 4.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute<void>(
-                                  builder: (BuildContext context) {
-                                    return OrderMedicine();
-                                  },
-                                ));
-                              },
-                            ),
-                          ],
+                          ),
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
                         ),
                       ),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            return MyAppointments();
+                          },
+                        ));
+                      },
                     ),
-
-                    //gfchbjkljuyhtfrgyhujikl;
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
-                      child: Row(
-                        children: const [
-                          Text(
-                            'Popular Doctors',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 27,
-                              fontWeight: FontWeight.bold,
+                    RawMaterialButton(
+                      child: Container(
+                        margin: EdgeInsets.all(10.0),
+                        child: Card(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Container(
+                            width: double.infinity,
+                            height: 150,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(FontAwesomeIcons.clinicMedical),
+                                Text(
+                                  'Lab Test',
+                                  style: kStyle,
+                                ),
+                                Text(
+                                  'Lab Test Booking',
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
                       ),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            return MyLabTestBookings();
+                          },
+                        ));
+                      },
                     ),
-                    /*fghjmjfiuygbuifiuh
-              * uinjdfkvn kld
-              * focx;l.
-              * njfkdlcxm
-              * vndfjkcxm
-              * nvfdkl*/
-
-                    new StreamBuilder<QuerySnapshot>(
-                        stream: _doctors,
-                        builder: (BuildContext context,
-                            AsyncSnapshot<QuerySnapshot> snapshot) {
-                          if (snapshot.hasError) {
-                            return new Text(
-                                'Error in receiving trip photos: ${snapshot.error}');
-                          }
-
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.none:
-                              return new Text(
-                                  'Not connected to the Stream or null');
-
-                            case ConnectionState.waiting:
-                              return new Text('Awaiting for interaction');
-
-                            case ConnectionState.active:
-                              print("Stream has started but not finished");
-
-                              var totalPhotosCount = 0;
-                              List<DocumentSnapshot> tripPhotos;
-
-                              if (snapshot.hasData) {
-                                tripPhotos = snapshot.data!.docs;
-                                totalPhotosCount = tripPhotos.length;
-
-                                if (totalPhotosCount > 0) {
-                                  return new GridView.builder(
-                                      itemCount: totalPhotosCount,
-                                      scrollDirection: Axis.vertical,
-                                      shrinkWrap: true,
-                                      primary: false,
-                                      gridDelegate:
-                                          new SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2),
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return Center(
-                                          child: Card(
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                width: 180,
-                                                height: 188,
-                                                child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          CircleAvatar(
-                                                              radius: 30,
-                                                              backgroundImage:
-                                                                  AssetImage(
-                                                                      'assets/images/mypic.png')),
-                                                          sizebox1,
-                                                          Text(
-                                                            tripPhotos[index]
-                                                                ['name'],
-                                                            style: kStyle,
-                                                          ),
-                                                          sizebox2,
-                                                          Text(tripPhotos[index]
-                                                              ['field']),
-                                                        ],
-                                                      ),
-                                                    ])),
-                                          ),
-                                        );
-                                      });
-                                }
-                              }
-
-                              return new Center(
-                                  child: Column(
-                                children: <Widget>[
-                                  new Padding(
-                                    padding: const EdgeInsets.only(top: 50.0),
-                                  ),
-                                  new Text(
-                                    "No trip photos found.",
-                                    style: kStyle,
-                                  )
-                                ],
-                              ));
-
-                            case ConnectionState.done:
-                              return new Text('Streaming is done');
-                          }
-                        }),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 188,
-                          child: Card(
-                            color: Color(0XFFFFFFFF),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage('assets/images/mypic.png')),
-                                sizebox1,
-                                Text(
-                                  'Dr. Chris Frazier ',
-                                  style: kStyle,
-                                ),
-                                sizebox2,
-                                Text('Pediatrician'),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 180,
-                          height: 188,
-                          child: Card(
-                            color: Color(0XFFFFFFFF),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage('assets/images/mypic.png')),
-                                sizebox1,
-                                Text(
-                                  'Dr. Chris Frazier ',
-                                  style: kStyle,
-                                ),
-                                sizebox2,
-                                Text('Pediatrician'),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    //rtfyguhijkol;
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 188,
-                          child: Card(
-                            color: Color(0XFFFFFFFF),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage('assets/images/mypic.png')),
-                                sizebox1,
-                                Text(
-                                  'Dr. Chris Frazier ',
-                                  style: kStyle,
-                                ),
-                                sizebox2,
-                                Text('Pediatrician'),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 180,
-                          height: 188,
-                          child: Card(
-                            color: Color(0XFFFFFFFF),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
+                    RawMaterialButton(
+                      child: Container(
+                        margin: EdgeInsets.all(10.0),
+                        child: Card(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            height: 150,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage('assets/images/mypic.png')),
-                                sizebox1,
+                                Icon(Icons.mediation),
                                 Text(
-                                  'Dr. Chris Frazier ',
+                                  'Order Medicine',
                                   style: kStyle,
                                 ),
-                                sizebox2,
-                                Text('Pediatrician'),
+                                Text(
+                                  'Order your medicine online',
+                                ),
                               ],
                             ),
                           ),
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
                         ),
-                      ],
+                      ),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            return OrderMedicine();
+                          },
+                        ));
+                      },
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 188,
-                          child: Card(
-                            color: Color(0XFFFFFFFF),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
+                    RawMaterialButton(
+                      child: Container(
+                        margin: EdgeInsets.all(10.0),
+                        child: Card(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            height: 150,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage('assets/images/mypic.png')),
-                                sizebox1,
+                                Icon(Icons.local_hospital_rounded),
                                 Text(
-                                  'Dr. Chris Frazier ',
+                                  'Hospitals',
                                   style: kStyle,
                                 ),
-                                sizebox2,
-                                Text('Pediatrician'),
+                                Text(
+                                  'List of hospitals',
+                                ),
                               ],
                             ),
                           ),
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
                         ),
-                        Container(
-                          width: 180,
-                          height: 188,
-                          child: Card(
-                            color: Color(0XFFFFFFFF),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            elevation: 15,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(Hospitals.routename);
+                      },
+                    ),
+                    RawMaterialButton(
+                      child: Container(
+                        margin: EdgeInsets.all(10.0),
+                        child: Card(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            height: 150,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage('assets/images/mypic.png')),
-                                sizebox1,
+                                Icon(FontAwesomeIcons.ambulance),
                                 Text(
-                                  'Dr. Chris Frazier ',
+                                  'Ambulance',
                                   style: kStyle,
                                 ),
-                                sizebox2,
-                                Text('Pediatrician'),
+                                Text(
+                                  'Book Ambulance directly',
+                                ),
                               ],
                             ),
                           ),
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
                         ),
-                      ],
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _makePhoneCall('tel:1122');
+                        });
+                      },
+                    ),
+                    RawMaterialButton(
+                      child: Container(
+                        margin: EdgeInsets.all(10.0),
+                        child: Card(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            height: 150,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(FontAwesomeIcons.ambulance),
+                                Text(
+                                  'Welfare',
+                                  style: kStyle,
+                                ),
+                                Text(
+                                  'Contact with welfare socities',
+                                ),
+                              ],
+                            ),
+                          ),
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            return Welfare();
+                          },
+                        ));
+                      },
                     ),
                   ],
                 ),
