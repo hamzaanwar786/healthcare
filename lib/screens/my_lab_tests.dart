@@ -250,18 +250,18 @@ class _MyLabTestsState extends State<MyLabTests> {
                               value: 'Lahore',
                               child: Text('Lahore'),
                             ),
-                            DropdownMenuItem(
-                              value: 'Islamabad',
-                              child: Text('Islamabad'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Karachi',
-                              child: Text('Karachi'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Faisalabad',
-                              child: Text('Faisalabad'),
-                            ),
+                            // DropdownMenuItem(
+                            //   value: 'Islamabad',
+                            //   child: Text('Islamabad'),
+                            // ),
+                            // DropdownMenuItem(
+                            //   value: 'Karachi',
+                            //   child: Text('Karachi'),
+                            // ),
+                            // DropdownMenuItem(
+                            //   value: 'Faisalabad',
+                            //   child: Text('Faisalabad'),
+                            // ),
                           ],
                           onChanged: (valueselectedbyUser) {
                             _locDropItemSelected(valueselectedbyUser);
@@ -363,8 +363,9 @@ class _MyLabTestsState extends State<MyLabTests> {
                     onPressed: () {
                       _selectDate(context);
                     },
-                    child: Text(
-                        "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+                    child: _date == null
+                        ? Text("Select Date")
+                        : Text(_date.toString()),
                   ),
                 ),
                 Container(
@@ -435,7 +436,32 @@ class _MyLabTestsState extends State<MyLabTests> {
                       backgroundColor: MaterialStateProperty.all(Colors.blue),
                     ),
                     onPressed: () {
-                      setState(() {
+                      if (_labName == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please Choose Your Lab')));
+                      } else if (_location == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please Choose Your Location')));
+                      } else if (_testName == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please Choose Your TestName')));
+                      } else if (_date == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please Select Date')));
+                      } else if (_name == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please enter your name')));
+                      } else if (_phone == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content:
+                                    Text('Please enter your contact number')));
+                      } else {
                         MessageDialog messageDialog = MessageDialog(
                           dialogBackgroundColor: Colors.white,
                           buttonOkColor: Colors.blue,
@@ -446,14 +472,18 @@ class _MyLabTestsState extends State<MyLabTests> {
                           buttonOkText: 'Ok',
                           dialogRadius: 20.0,
                           buttonRadius: 15.0,
+                          buttonOkOnPressed: () {
+                            Navigator.of(context).pop();
+                            addLabTextBooking();
+                          },
                         );
                         messageDialog.show(
                           context,
                           barrierColor: Colors.white,
                         );
-                        addLabTextBooking();
-                      });
-                      print('total bill');
+
+                        print('total bill');
+                      }
                     },
                     child: const Text(
                       'Total Bill',

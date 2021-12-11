@@ -15,6 +15,7 @@ class AppointmentDoctors extends StatefulWidget {
 }
 
 class _AppointmentDoctorsState extends State<AppointmentDoctors> {
+  final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
   bool isId = false;
   var d_id = null;
@@ -31,7 +32,7 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
       _doctor_name,
       _date,
       _time,
-      _pastmed = null;
+      _pastmed;
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('appointments');
 
@@ -287,8 +288,9 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
                   onPressed: () {
                     _selectDate(context);
                   },
-                  child: Text(
-                      "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+                  child: _date == null
+                      ? Text("Select Date")
+                      : Text(_date.toString()),
                 ),
               ),
               Container(
@@ -301,7 +303,9 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
                   onPressed: () {
                     _selectTime(context);
                   },
-                  child: Text("${selectedTime.hour}:${selectedTime.minute}"),
+                  child: _time == null
+                      ? Text("Select Time")
+                      : Text(_time.toString()),
                 ),
               ),
               Container(
@@ -385,6 +389,7 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
                               ),
                             ),
                           ),
+                          onChanged: (input) => _pastmed = input,
                         ),
                         // ends the actual text box
                       ),
@@ -418,11 +423,46 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
                       //   //   context,
                       //   //   barrierColor: Colors.white,
                       //   // );
-
-                      addApointment();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Medicine Ordered')));
-
+                      if (_hospital_name == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please choose a hospital')));
+                      } else if (_doctor_name == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please choose a doctor')));
+                      } else if (_date == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please choose a date')));
+                      } else if (_time == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please choose a time')));
+                      } else if (_name == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please enter your name')));
+                      } else if (_location == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please enter your location')));
+                      } else if (_description == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content:
+                                    Text('Please enter your description')));
+                      } else {
+                        Navigator.of(context).pop();
+                        addApointment();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Medicine Ordered')));
+                      }
+                      // if (_formKey.currentState!.validate()) {
+                      //   addApointment();
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //       const SnackBar(content: Text('Medicine Ordered')));
+                      // }
                       // });
                     },
                     child: const Text(
