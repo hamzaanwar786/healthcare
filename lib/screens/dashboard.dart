@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:healthcare/screens/welfare.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -75,6 +77,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     Size sizeBar = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         maintainBottomViewPadding: true,
         child: !isloggedin
@@ -83,45 +86,33 @@ class _DashboardState extends State<Dashboard> {
               )
             : SingleChildScrollView(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
-                      child: Container(
-                          margin: EdgeInsets.only(left: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                user!.displayName,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Color(0XFF302F33),
-                                  fontSize: 33,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(right: 30.0),
-                                child: Icon(
-                                  Icons.accessibility,
-                                  size: 50,
-                                  color: Color(0XFFFECD47),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  alignment: Alignment.topRight,
-                                  child: CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage('assets/images/mypic.png'),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
+                    // Container(
+                    //   child: ,
+                    // ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      alignment: Alignment.topLeft,
+                      child: CircleAvatar(
+                        radius: 25,
+                        backgroundImage: AssetImage('assets/images/mypic.png'),
+                      ),
                     ),
+                    Container(
+                        padding: EdgeInsets.all(10),
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Welcome ' + user!.displayName,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontFamily: 'TTNorms',
+                            fontSize: 25,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+
                     RawMaterialButton(
                       child: Container(
                         margin: EdgeInsets.all(10.0),

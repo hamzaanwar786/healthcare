@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:healthcare/screens/splash_screen.dart';
 
 import './screens/doctors_profile.dart';
 import './screens/homepage.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
       // home: DoctorsProfile(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => BottomNavigationView(),
+        '/': (ctx) => SplashScreen(),
+        BottomNavigationView.routename: (ctx) => BottomNavigationView(),
         Hospitals.routename: (ctx) => Hospitals(),
         HospitalsDetails.routename: (ctx) => HospitalsDetails(),
         DoctorsProfile.routename: (ctx) => DoctorsProfile(),

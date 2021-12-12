@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../screens/bottomnavigationview.dart';
 import '../screens/homepage.dart';
 
@@ -65,18 +66,55 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Container(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: 400,
-                child: Image.asset(
-                  'assets/images/registerimage.jpg',
-                  fit: BoxFit.cover,
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(240, 240, 240, 100),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      child: Text(
+                        'Register',
+                        style: TextStyle(
+                            fontFamily: 'TTNorms',
+                            fontSize: 35,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Image.asset(
+                      'assets/images/registerimage.jpg',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ],
               ),
               Container(
                 child: Form(
@@ -84,12 +122,21 @@ class _SignUpState extends State<SignUp> {
                   child: Column(
                     children: [
                       Container(
+                        width: size.width * 1,
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(240, 240, 240, 100),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         padding: EdgeInsets.all(8.0),
                         child: TextFormField(
                           decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.all(10),
                             labelText: 'Name',
-                            icon: Icon(Icons.perm_identity),
-                            hintText: 'Write your name',
+                            border: InputBorder.none,
+                          ),
+                          style: TextStyle(
+                            fontFamily: 'TTNorms',
                           ),
                           keyboardType: TextInputType.text,
                           onSaved: (input) => _name = input!,
@@ -99,12 +146,21 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       Container(
+                        width: size.width * 1,
+                        margin: EdgeInsets.only(top: 10, left: 20, right: 20),
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(240, 240, 240, 100),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         padding: EdgeInsets.all(8.0),
                         child: TextFormField(
                           decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.all(10),
                             labelText: 'Email',
-                            icon: Icon(Icons.email),
-                            hintText: 'Your email address',
+                            border: InputBorder.none,
+                          ),
+                          style: TextStyle(
+                            fontFamily: 'TTNorms',
                           ),
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (input) => _email = input!,
@@ -114,6 +170,12 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       Container(
+                          width: size.width * 1,
+                          margin: EdgeInsets.only(top: 10, left: 20, right: 20),
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(240, 240, 240, 100),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           padding: EdgeInsets.all(8.0),
                           child: TextFormField(
                             validator: (input) {
@@ -122,32 +184,43 @@ class _SignUpState extends State<SignUp> {
                               }
                             },
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(10),
                               labelText: 'Password',
-                              hintText: 'Enter minimum 6 character password',
-                              icon: Icon(Icons.lock),
+                              border: InputBorder.none,
+                            ),
+                            style: TextStyle(
+                              fontFamily: 'TTNorms',
                             ),
                             obscureText: true,
                             onSaved: (input) => _password = input!,
                           )),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      ElevatedButton(
-                        onPressed: sign_Up,
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                      Container(
+                        width: size.width * 1,
+                        margin: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          onPressed: sign_Up,
+                          child: Text(
+                            'Register',
+                            style: TextStyle(
+                              fontFamily: 'TTNorms',
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
-                          primary: Theme.of(context).primaryColor,
-                          onPrimary: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32.0),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Theme.of(context).primaryColor),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            padding: MaterialStateProperty.all(
+                              EdgeInsets.all(20.0),
+                            ),
+                            shadowColor:
+                                MaterialStateProperty.all(Colors.black),
+                            elevation: MaterialStateProperty.all(10),
                           ),
                         ),
                       ),

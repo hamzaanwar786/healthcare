@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../screens/singup.dart';
 import '../screens/login.dart';
 
@@ -19,105 +20,127 @@ class _StartState extends State<Start> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30.0,
-            ),
-            Container(
-              height: 400,
-              child: Image.asset(
-                'assets/images/welcomeimage.jpg',
-                fit: BoxFit.contain,
-              ),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Center(
-              child: Container(
-                child: RichText(
-                    text: TextSpan(
-                        text: 'Welcome to ',
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+      body: SafeArea(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  margin: EdgeInsets.only(top: size.height * 0.1),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Welcome',
+                          style: TextStyle(
+                            fontFamily: 'TTNorms',
+                            fontSize: 30.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        children: <TextSpan>[
-                      TextSpan(
-                        text: 'Health Care',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
+                        SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          'to Health Care',
+                          style: TextStyle(
+                              fontFamily: 'TTNorms',
+                              fontSize: 30.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text('Find the medical facility at your home',
+                            style: TextStyle(
+                              fontFamily: 'TTNorms',
+                              color: Colors.grey,
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/images/welcomeimage2.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: size.width * 1,
+                      padding: EdgeInsets.all(10.0),
+                      child: ElevatedButton(
+                        onPressed: navigatetoRegister,
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                            fontFamily: 'TTNorms',
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Theme.of(context).primaryColor),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.all(20.0),
+                          ),
+                          shadowColor: MaterialStateProperty.all(Colors.black),
+                          elevation: MaterialStateProperty.all(10),
                         ),
                       ),
-                    ])),
+                    ),
+                    Container(
+                      width: size.width * 1,
+                      padding: EdgeInsets.all(10.0),
+                      child: TextButton(
+                        onPressed: navigatetoLogin,
+                        child: Text(
+                          'I already have an account',
+                          style: TextStyle(
+                            fontFamily: 'TTNorms',
+                            fontSize: 15,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Text('Find the medical facility at your home'),
-            SizedBox(
-              height: 30.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: navigatetoLogin,
-                  child: Text(
-                    'LOGIN',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.only(left: 30, right: 30),
-                    primary: Theme.of(context).primaryColor,
-                    onPrimary: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 20.0,
-                ),
-                ElevatedButton(
-                  onPressed: navigatetoRegister,
-                  child: Text(
-                    'REGISTER',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.only(left: 30, right: 30),
-                    primary: Theme.of(context).primaryColor,
-                    onPrimary: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 20.0,
-            ),
-            SignInButton(
-              Buttons.Google,
-              text: "Sign up with Google",
-              onPressed: () {},
-            )
-          ],
+              // SizedBox(
+              //   width: 20.0,
+              // ),
+              // SignInButton(
+              //   Buttons.Google,
+              //   text: "Sign up with Google",
+              //   onPressed: () {},
+              // )
+            ],
+          ),
         ),
       ),
     );

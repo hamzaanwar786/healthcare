@@ -56,7 +56,7 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
     final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2010),
+      firstDate: DateTime.now().subtract(Duration(days: 0)),
       lastDate: DateTime(2025),
     );
     if (selected != null && selected != selectedDate)

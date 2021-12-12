@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dialogs/dialogs/message_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -106,7 +105,7 @@ class _MyLabTestsState extends State<MyLabTests> {
     final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2010),
+      firstDate: DateTime.now().subtract(Duration(days: 0)),
       lastDate: DateTime(2025),
     );
     if (selected != null && selected != selectedDate)
@@ -144,6 +143,9 @@ class _MyLabTestsState extends State<MyLabTests> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Container(
+                //   child: ,
+                // )
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30.0),
                   decoration: BoxDecoration(
