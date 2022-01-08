@@ -21,19 +21,19 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       body: Column(
         children: [
-          RawMaterialButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute<void>(
-                builder: (BuildContext context) {
-                  return ProfileEdit();
-                },
-              ));
-            },
-            child: Container(
-              alignment: Alignment.topRight,
-              child: Text('Edit'),
-            ),
-          ),
+          // RawMaterialButton(
+          //   onPressed: () {
+          //     Navigator.push(context, MaterialPageRoute<void>(
+          //       builder: (BuildContext context) {
+          //         return ProfileEdit();
+          //       },
+          //     ));
+          //   },
+          //   child: Container(
+          //     alignment: Alignment.topRight,
+          //     child: Text('Edit'),
+          //   ),
+          // ),
           SizedBox(
             height: 50,
           ),

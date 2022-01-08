@@ -134,6 +134,15 @@ class _MyLabTestsState extends State<MyLabTests> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        // title: Text('Order Medicine'),
+      ),
       backgroundColor: Color(0XFFFFFFFF),
       body: SafeArea(
         child: Center(

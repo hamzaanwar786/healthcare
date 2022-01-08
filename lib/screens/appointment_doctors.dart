@@ -131,6 +131,15 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        // title: Text('Order Medicine'),
+      ),
       backgroundColor: Color(0XFFFFFFFF),
       body: SafeArea(
         maintainBottomViewPadding: true,
@@ -157,22 +166,22 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: RawMaterialButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute<void>(
-                              builder: (BuildContext context) {
-                                return MyAppointments();
-                              },
-                            ));
-                          },
-                          child: Container(
-                            alignment: Alignment.topRight,
-                            child: Text('All Recipt'),
-                          ),
-                        ),
-                      ),
+                      // Expanded(
+                      //   flex: 1,
+                      //   child: RawMaterialButton(
+                      //     onPressed: () {
+                      //       Navigator.push(context, MaterialPageRoute<void>(
+                      //         builder: (BuildContext context) {
+                      //           return MyAppointments();
+                      //         },
+                      //       ));
+                      //     },
+                      //     child: Container(
+                      //       alignment: Alignment.topRight,
+                      //       child: Text('All Recipt'),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -456,7 +465,7 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
                         Navigator.of(context).pop();
                         addApointment();
                         ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Medicine Ordered')));
+                            const SnackBar(content: Text('Appointment Fixed')));
                       }
                       // if (_formKey.currentState!.validate()) {
                       //   addApointment();

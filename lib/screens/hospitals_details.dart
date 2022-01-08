@@ -72,7 +72,7 @@ class _HospitalsDetailsState extends State<HospitalsDetails> {
                                 primary: false,
                                 gridDelegate:
                                     new SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2),
+                                        crossAxisCount: 3),
                                 itemBuilder: (BuildContext context, int index) {
                                   return Center(
                                     child: GestureDetector(
@@ -91,37 +91,41 @@ class _HospitalsDetailsState extends State<HospitalsDetails> {
                                               time: tripPhotos[index]['time']),
                                         );
                                       },
-                                      child: Card(
-                                        child: Container(
-                                            alignment: Alignment.center,
-                                            width: 180,
-                                            height: 188,
-                                            child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      CircleAvatar(
-                                                          radius: 30,
-                                                          backgroundImage:
-                                                              AssetImage(
-                                                                  'assets/images/mypic.png')),
-                                                      sizebox1,
-                                                      Text(
-                                                        tripPhotos[index]
-                                                            ['name'],
-                                                        style: kStyle,
-                                                      ),
-                                                      sizebox2,
-                                                      Text(tripPhotos[index]
-                                                          ['field']),
-                                                    ],
-                                                  ),
-                                                ])),
-                                      ),
+                                      child: Container(
+                                          margin: EdgeInsets.all(8),
+                                          // padding: EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(width: 1),
+                                            color: Colors.white,
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    CircleAvatar(
+                                                        radius: 30,
+                                                        backgroundImage: AssetImage(
+                                                            'assets/images/mypic.png')),
+                                                    sizebox1,
+                                                    Text(
+                                                      tripPhotos[index]['name'],
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    sizebox2,
+                                                    Text(tripPhotos[index]
+                                                        ['field']),
+                                                  ],
+                                                ),
+                                              ])),
                                     ),
                                   );
                                 });
@@ -147,23 +151,111 @@ class _HospitalsDetailsState extends State<HospitalsDetails> {
                   }),
             ),
             SingleChildScrollView(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(child: Icon(Icons.local_hospital)),
-                      Expanded(
-                          child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text(data.name),
-                          ),
-                        ],
-                      ))
-                    ],
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(child: Icon(Icons.local_hospital)),
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text('Name: ' + data.name),
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Icon(Icons.location_city)),
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text('Address: ' + data.address),
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Icon(Icons.medical_services)),
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                  'Doctors on board: ' + data.doctoronboard),
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Icon(Icons.event_available)),
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text('Availablity: ' + data.availablity),
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Icon(Icons.warning)),
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text('Emergency: ' + data.emergency),
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Icon(Icons.medication)),
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text('ICU: ' + data.icu),
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Icon(Icons.mediation_rounded)),
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text('Ventilator: ' + data.ventilator),
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
 

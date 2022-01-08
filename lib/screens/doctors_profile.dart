@@ -15,6 +15,15 @@ class _DoctorsProfileState extends State<DoctorsProfile> {
     final data = ModalRoute.of(context)!.settings.arguments as Doctors;
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        // title: Text('Order Medicine'),
+      ),
       backgroundColor: Colors.blue.shade200,
       body: SafeArea(
         child: Column(
