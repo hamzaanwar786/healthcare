@@ -166,22 +166,6 @@ class _AppointmentDoctorsState extends State<AppointmentDoctors> {
                           ),
                         ),
                       ),
-                      // Expanded(
-                      //   flex: 1,
-                      //   child: RawMaterialButton(
-                      //     onPressed: () {
-                      //       Navigator.push(context, MaterialPageRoute<void>(
-                      //         builder: (BuildContext context) {
-                      //           return MyAppointments();
-                      //         },
-                      //       ));
-                      //     },
-                      //     child: Container(
-                      //       alignment: Alignment.topRight,
-                      //       child: Text('All Recipt'),
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

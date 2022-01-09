@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../screens/dashboard.dart';
-import '../screens/start.dart';
-import '../screens/homepage.dart';
-import '../screens/profile.dart';
+import './dashboard.dart';
+import './start.dart';
+import './homepage.dart';
+import './profile.dart';
 
 class BottomNavigationView extends StatefulWidget {
   static const routename = 'bottom_navigation_view';

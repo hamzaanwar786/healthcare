@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../screens/bottomnavigationview.dart';
-import '../screens/homepage.dart';
+import './bottomnavigationview.dart';
+import './homepage.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -28,7 +28,7 @@ class _SignUpState extends State<SignUp> {
   @override
   void initState() {
     super.initState();
-    this.checkAuthentification();
+    // this.checkAuthentification();
   }
 
   sign_Up() async {
